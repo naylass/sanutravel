@@ -17,8 +17,8 @@ class DepartemenResource extends Resource
 {
     protected static ?string $model = Departemen::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ?string $navigationGroup = 'Master Data';
+    protected static $navigationIcon = 'heroicon-o-building-office';
+    protected static $navigationGroup = 'Master Data';
     protected static ?string $navigationLabel = 'Departemen';
     protected static ?int $navigationSort = 1;
     public static function form(Form $form): Form
