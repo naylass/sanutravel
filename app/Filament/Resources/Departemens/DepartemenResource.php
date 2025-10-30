@@ -1,67 +1,42 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\Resources\Departments;
 
-use App\Filament\Resources\DepartemenResource\Pages;
-use App\Filament\Resources\DepartemenResource\RelationManagers;
-use App\Models\Departemen;
-use Filament\Forms;
-use Filament\Forms\Form;
+use App\Filament\Resources\Departments\Pages\CreateDepartment;
+use App\Filament\Resources\Departments\Pages\EditDepartment;
+use App\Filament\Resources\Departments\Pages\ListDepartments;
+use App\Filament\Resources\Departments\Pages\ViewDepartment;
+use App\Filament\Resources\Departments\Schemas\DepartmentForm;
+use App\Filament\Resources\Departments\Schemas\DepartmentInfolist;
+use App\Filament\Resources\Departments\Tables\DepartmentsTable;
+use App\Models\Department;
+use BackedEnum;
 use Filament\Resources\Resource;
-use Filament\Tables;
+use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class DepartemenResource extends Resource
+class DepartmentResource extends Resource
 {
-    protected static ?string $model = Departemen::class;
+    protected static ?string $model = Department::class;
 
-    protected static $navigationIcon = 'heroicon-o-building-office';
-    protected static $navigationGroup = 'Master Data';
-    protected static ?string $navigationLabel = 'Departemen';
-    protected static ?int $navigationSort = 1;
-    public static function form(Form $form): Form
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+
+    protected static ?string $recordTitleAttribute = 'Departments';
+
+    public static function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
-                Forms\Components\TextInput::make('nama_departemen')
-                ->required()
-                ->label('Nama Departemen')
-                ->maxLength(40),
-            ]);
+        return DepartmentForm::configure($schema);
+    }
+
+    public static function infolist(Schema $schema): Schema
+    {
+        return DepartmentInfolist::configure($schema);
     }
 
     public static function table(Table $table): Table
     {
-        return $table
-            ->columns([
-                Tables\Columns\TextColumn::make('id')->label('ID'),
-                Tables\Columns\TextColumn::make('nama_departemen')->label('Nama Departemen')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('created_at')->label('Dibuat'),
-            ])
-            ->filters([
-                Tables\Filters\Filter::make('nama_departemen')
-                    ->form([
-                        Forms\Components\TextInput::make('nama_departemen')
-                            ->label('Nama Departemen'),
-                    ])
-                    ->query(function (Builder $query, array $data) {
-                        return $query
-                            ->when($data['nama_departemen'], function ($query, $nama) {
-                                $query->where('nama_departemen', 'like', "%{$nama}%");
-                            });
-                    }),
-            ])
-        
-            ->actions([
-                Tables\Actions\EditAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
-            ]);
+        return DepartmentsTable::configure($table);
     }
 
     public static function getRelations(): array
@@ -74,9 +49,10 @@ class DepartemenResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListDepartemens::route('/'),
-            // 'create' => Pages\CreateDepartemen::route('/create'),
-            // 'edit' => Pages\EditDepartemen::route('/{record}/edit'),
+            'index' => ListDepartments::route('/'),
+            'create' => CreateDepartment::route('/create'),
+            'view' => ViewDepartment::route('/{record}'),
+            'edit' => EditDepartment::route('/{record}/edit'),
         ];
     }
 }
