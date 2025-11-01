@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Driver;
 use Illuminate\Http\Request;
 
-class DriverController extends Controller
+class DriversController extends Controller
 {
     /**
      * Display a listing of the resource.
