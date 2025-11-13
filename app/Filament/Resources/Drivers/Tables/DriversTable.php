@@ -8,6 +8,7 @@ use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Actions\DeleteAction;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Table;
 
 class DriversTable
@@ -19,22 +20,39 @@ class DriversTable
                 TextColumn::make('id')
                     ->label('ID')
                     ->sortable()
-                    ->searchable(),
+                    ->toggleable(),
                 TextColumn::make('name')
-                    ->searchable(),
+                    ->searchable()
+                    ->sortable(),
                 TextColumn::make('phone')
                     ->searchable(),
                 TextColumn::make('birth_place')
-                    ->searchable(),
+                    ->label('Tempat Lahir')
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('birth_date')
                     ->date(),
-                TextColumn::make('gender'),
+                TextColumn::make('gender')
+                    ->label('Gender')
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('address')
                     ->limit(50),
                 TextColumn::make('license_number')
+                    ->label('License Number')
+                    ->sortable()
                     ->searchable(),
-                TextColumn::make('photo'),
-                TextColumn::make('status'),
+                ImageColumn::make('photo')
+                    ->circular()
+                    ->size(40)
+                    ->toggleable(),
+                TextColumn::make('status')
+                    ->label('Status')
+                    ->badge()
+                    ->colors([
+                        'success' => 'available',
+                        'warning' => 'on_trip',
+                        'danger' => 'unavailable',
+                    ])
+                    ->sortable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
