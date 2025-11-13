@@ -16,12 +16,24 @@ class DriversTable
     {
         return $table
             ->columns([
+                TextColumn::make('id')
+                    ->label('ID')
+                    ->sortable()
+                    ->searchable(),
                 TextColumn::make('name')
                     ->searchable(),
                 TextColumn::make('phone')
                     ->searchable(),
+                TextColumn::make('birth_place')
+                    ->searchable(),
+                TextColumn::make('birth_date')
+                    ->date(),
+                TextColumn::make('gender'),
+                TextColumn::make('address')
+                    ->limit(50),
                 TextColumn::make('license_number')
                     ->searchable(),
+                TextColumn::make('photo'),
                 TextColumn::make('status'),
                 TextColumn::make('created_at')
                     ->dateTime()

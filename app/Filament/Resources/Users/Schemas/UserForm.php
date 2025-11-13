@@ -23,7 +23,7 @@ class UserForm
                     ->options([
                         'driver' => 'Driver',
                         'customer' => 'Customer',
-
+                        
                     ])
                     ->required(),
                 DateTimePicker::make('email_verified_at')
