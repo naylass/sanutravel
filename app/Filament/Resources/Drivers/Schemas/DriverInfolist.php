@@ -12,6 +12,9 @@ class DriverInfolist
     {
         return $schema
             ->components([
+                ImageEntry::make('photo')
+                    ->height(120)
+                    ->width(120),
                 TextEntry::make('name'),
                 TextEntry::make('phone'),
                 TextEntry::make('birth_place'),
@@ -21,9 +24,6 @@ class DriverInfolist
                 TextEntry::make('address'),
                 TextEntry::make('medical_history'),
                 TextEntry::make('license_number'),
-                ImageEntry::make('photo')
-                    ->height(120)
-                    ->width(120),
                 TextEntry::make('status'),
                 TextEntry::make('created_at')
                     ->dateTime(),

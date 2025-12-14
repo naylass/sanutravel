@@ -21,6 +21,10 @@ class DriversTable
                     ->label('ID')
                     ->sortable()
                     ->toggleable(),
+                ImageColumn::make('photo')
+                    ->circular()
+                    ->size(40)
+                    ->toggleable(),
                 TextColumn::make('name')
                     ->searchable()
                     ->sortable(),
@@ -36,14 +40,12 @@ class DriversTable
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('address')
                     ->limit(50),
+                TextColumn::make('medical_history')
+                    ->label('Medical History'),
                 TextColumn::make('license_number')
                     ->label('License Number')
                     ->sortable()
                     ->searchable(),
-                ImageColumn::make('photo')
-                    ->circular()
-                    ->size(40)
-                    ->toggleable(),
                 TextColumn::make('status')
                     ->label('Status')
                     ->badge()

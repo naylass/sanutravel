@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('drivers', function (Blueprint $table) {
             $table->id();
+            $table->string('photo')->nullable()->default('drivers/default.png');
             $table->string('name');
             $table->string('phone')->unique();
             $table->string('birth_place')->nullable();
@@ -22,7 +23,6 @@ return new class extends Migration
             $table->text('medical_history')->nullable();
             $table->string('license_number')->unique();
             $table->enum('status', ['available', 'unavailable', 'on_trip'])->default('available');
-            $table->string('photo')->nullable()->default('drivers/default.png');
             $table->timestamps();
         });
     }

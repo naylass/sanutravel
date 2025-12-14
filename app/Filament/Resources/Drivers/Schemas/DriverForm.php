@@ -15,6 +15,12 @@ class DriverForm
     {
         return $schema
             ->components([
+                FileUpload::make('photo')
+                    ->image()
+                    ->directory('drivers')
+                    ->imagePreviewHeight('120')
+                    ->maxSize(2048)
+                    ->required(),
                 TextInput::make('name')
                     ->required(),
                 TextInput::make('phone')
@@ -42,12 +48,6 @@ class DriverForm
                 TextInput::make('medical_history')
                     ->required(),
                 TextInput::make('license_number')
-                    ->required(),
-                FileUpload::make('photo')
-                    ->image()
-                    ->directory('drivers')
-                    ->imagePreviewHeight('120')
-                    ->maxSize(2048)
                     ->required(),
                 Select::make('status')
                     ->options(['available' => 'Available', 'unavailable' => 'Unavailable', 'on_trip' => 'On trip'])
