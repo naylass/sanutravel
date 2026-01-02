@@ -21,6 +21,7 @@ class UserForm
                     ->required(),
                 Select::make('role')
                     ->options([
+                        'admin' => 'Admin',
                         'driver' => 'Driver',
                         'customer' => 'Customer',
                         

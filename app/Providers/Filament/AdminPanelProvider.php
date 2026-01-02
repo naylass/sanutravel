@@ -29,6 +29,8 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->brandName('Sanu Travel')
             ->favicon(asset('icons/app.ico'))
+            ->registration()
+            ->PasswordReset()
             ->login()
             ->colors([
                 'primary' => Color::Emerald,
